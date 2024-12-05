@@ -24,50 +24,45 @@ module alu (input [15:0] inputA,
 
 	// SVA properties
 	property check_add;
-	@(posedge clk) (opcode == 3'b000) |-> (result == $past(inputA) + $past(inputB));
+	@(posedge clk) (opcode == 3'b000) |-> (result == inputA + inputB);
 	endproperty
 
 	property check_multiply;
-	@(posedge clk) (opcode == 3'b001) |-> (result == $past(inputA) * $past(inputB));
+	@(posedge clk) (opcode == 3'b001) |-> (result == inputA * inputB);
 	endproperty
 
 	property check_subtract;
-	@(posedge clk) (opcode == 3'b010) |-> (result == $past(inputA) - $past(inputB));
+	@(posedge clk) (opcode == 3'b010) |-> (result == inputA - inputB);
 	endproperty
 
 	property check_and;
-	@(posedge clk) (opcode == 3'b011) |-> (result == ($past(inputA) & $past(inputB)));
+	@(posedge clk) (opcode == 3'b011) |-> (result == (inputA & inputB));
 	endproperty
 
 	property check_or;
-	@(posedge clk) (opcode == 3'b100) |-> (result == ($past(inputA) | $past(inputB)));
+	@(posedge clk) (opcode == 3'b100) |-> (result == (inputA | inputB));
 	endproperty
 
 	property check_xor;
-	@(posedge clk) (opcode == 3'b101) |-> (result == ($past(inputA) ^ $past(inputB)));
+	@(posedge clk) (opcode == 3'b101) |-> (result == (inputA ^ inputB));
 	endproperty
 
 	property check_not;
-	@(posedge clk) (opcode == 3'b110) |-> (result == ~$past(inputA));
+	@(posedge clk) (opcode == 3'b110) |-> (result == ~inputA);
 	endproperty
 
+
 	// Assertions
-	assert property (check_add) else $error("ADD operation failed");
-	assert property (check_multiply) else $error("MULTIPLY operation failed");
-	assert property (check_subtract) else $error("SUBTRACT operation failed");
-	assert property (check_and) else $error("AND operation failed");
-	assert property (check_or) else $error("OR operation failed");
-	assert property (check_xor) else $error("XOR operation failed");
-	assert property (check_not) else $error("NOT operation failed");
+	ADD_CHECK: assert property (check_add) else $error("ADD operation failed");
+	MULTIPLY_CHECK:assert property (check_multiply) else $error("MULTIPLY operation failed");
+	SUBTRACT_CHECK: assert property (check_subtract) else $error("SUBTRACT operation failed");
+	AND_CHECK: assert property (check_and) else $error("AND operation failed");
+	OR_CHECK: assert property (check_or) else $error("OR operation failed");
+	XOR_CHECK: assert property (check_xor) else $error("XOR operation failed");
+	NOT_CHECK: assert property (check_not) else $error("NOT operation failed");
 
 
 	// Need to write overflow properties
-
-	// Assertions for overflow checks
-	assert property (check_add_overflow) else $error("ADD operation overflow detected");
-	assert property (check_multiply_overflow) else $error("MULTIPLY operation overflow detected");
-	assert property (check_subtract_overflow) else $error("SUBTRACT operation overflow detected");
-
 
 
 endmodule
