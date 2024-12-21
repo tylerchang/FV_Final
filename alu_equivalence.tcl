@@ -1,6 +1,6 @@
 clear -all
 
-check_sec -analyze -spec -sv alu.sv
+check_sec -analyze -spec -sv alu_no_mul.sv
 check_sec -analyze -imp -sv structural_alu.sv
 check_sec -elaborate -spec -top alu
 check_sec -elaborate -imp -top structural_alu
