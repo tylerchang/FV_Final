@@ -1,0 +1,77 @@
+# ----------------------------------------
+# Jasper Version Info
+# tool      : Jasper 2024.06
+# platform  : Linux 4.18.0-553.32.1.el8_10.x86_64
+# version   : 2024.06p002 64 bits
+# build date: 2024.09.02 16:28:38 UTC
+# ----------------------------------------
+# started   : 2024-12-20 21:16:04 EST
+# hostname  : cadpc14.(none)
+# pid       : 644945
+# arguments : '-label' 'session_0' '-console' '//127.0.0.1:34005' '-style' 'windows' '-data' 'AAAAgnicY2RgYLCp////PwMYMD6A0Aw2jAyoAMRnQhUJbEChGRhYYZqRNUkxJDLkMJQyxDMUM6QylABZBQx6QDoZKAoCACSrDB4=' '-proj' '/homes/user/stud/fall24/tyc2118/FV_Final/jgproject/sessionLogs/session_0' '-init' '-hidden' '/homes/user/stud/fall24/tyc2118/FV_Final/jgproject/.tmp/.initCmds.tcl' 'alu_setup.tcl'
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2024 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc.
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+Jasper Apps Analysis Session - /homes/user/stud/fall24/tyc2118/FV_Final/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out licenses "jasper_interactive" and "jasper_fao".
+INFO: reading configuration file "/user/stud/fall24/tyc2118/.config/cadence/jasper.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% 
+% analyze -sv09 alu.sv
+[-- (VERI-1482)] Analyzing Verilog file '/tools/cadence/jasper_2024.06p002/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file 'alu.sv'
+% elaborate -top alu
+INFO (ISW003): Top module name is "alu".
+[INFO (HIER-8002)] alu.sv(68): Disabling old hierarchical reference handler
+[INFO (VERI-1018)] alu.sv(1): compiling module 'alu'
+INFO (INL208): Elaboration synthesis summary:
+  Number of synthesized netlists          1 (0 packages)
+  Single run mode                         On
+  Pipeline                                On (1 pipelined netlists)
+  Late hierarchical reference connection  On
+  Number of analyzed Verilog modules      1 (1 synthesized)
+  Number of analyzed VHDL entities        0 (0 synthesized)
+WARNING (WNL018): alu.sv(12): multiplication operator mult_16u_16u (size 32) automatically black boxed.
+    Use the "elaborate -bbox_mul" command to prevent automatic black-boxing.
+WARNING (WNL018): alu.sv(31): multiplication operator mult_16u_16u (size 32) automatically black boxed.
+    Use the "elaborate -bbox_mul" command to prevent automatic black-boxing.
+INFO (INL003): Clearing all state information (assumes, stopats, and so forth).
+alu
+[<embedded>] % 
+[<embedded>] % clock clk
+[<embedded>] % reset ~rst_n
+INFO (IPM031): Clearing proof results of all properties.
+INFO (IRS006): Current reset condition is "rst_n".
