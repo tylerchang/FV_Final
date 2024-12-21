@@ -3,7 +3,8 @@ module alu (input [15:0] inputA,
             input [2:0] opcode,
 	    input clk,
 	    input rst_n,
-            output reg [15:0] result   
+            output reg [31:0] result,
+	    output reg[1:0] overflow_flag   
 );
 	
 	always @(*) begin
@@ -61,8 +62,6 @@ module alu (input [15:0] inputA,
 	XOR_CHECK: assert property (check_xor) else $error("XOR operation failed");
 	NOT_CHECK: assert property (check_not) else $error("NOT operation failed");
 
-
-	// Need to write overflow properties
 
 
 endmodule
