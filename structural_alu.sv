@@ -1,4 +1,4 @@
-module alu(Y, C, V, N, Z, A, B, Op);
+/*module alu(Y, C, V, N, Z, A, B, Op);
    output [15:0] Y;  // Result.
    output 	 C;  // Carry.
    output 	 N;  // Negative.
@@ -26,7 +26,48 @@ module alu(Y, C, V, N, Z, A, B, Op);
    and(V, Vas, s);
    and(N, Y[15], s);       // Most significant bit is the sign bit in 2's complement.   
    zero z(Z, Y);           // All operations can set the Zero status bit.
-endmodule // alu
+endmodule // alu*/
+
+module structural_alu (
+    input  logic        clk,          // Clock signal
+    input  logic        rst_n,        // Active-low Reset signal
+    input  logic [15:0] inputA,       // Operand A
+    input  logic [15:0] inputB,       // Operand B
+    input  logic [2:0]  opcode,       // Operation code
+    output logic [15:0] result,       // Result
+    output logic        overflow_flag // Overflow flag
+);
+
+    wire [15:0] AS, And, Or, Xor, Not;
+    wire        Vas, Cas;
+
+    // Operations
+    carry_select_adder_subtractor addsub(AS, Cas, Vas, inputA, inputB, opcode[0]); // Op == 3'b000, 3'b001
+    andop aluand(And, inputA, inputB);                                            // Op == 3'b010
+    orop aluor(Or, inputA, inputB);                                               // Op == 3'b011
+    xorop aluxor(Xor, inputA, inputB);                                            // Op == 3'b100
+    notop alunot(Not, inputA);                                                    // Op == 3'b101
+    multiplexer_8_1 muxy(result, AS, AS, And, Or, Xor, Not, 16'b0, 16'b0, opcode);// Select the result.
+
+    // Sequential behavior
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            result        <= 16'b0;
+            overflow_flag <= 1'b0;
+        end else begin
+            case (opcode)
+                3'b000: result <= AS;        // ADD
+                3'b001: result <= AS;        // SUB
+                3'b010: result <= And;       // AND
+                3'b011: result <= Or;        // OR
+                3'b100: result <= Xor;       // XOR
+                3'b101: result <= Not;       // NOT
+                default: result <= 16'b0;    // Default
+            endcase
+            overflow_flag <= Vas;            // Update overflow flag
+        end
+    end
+endmodule
 
 module andop(Y, A, B);
    output [15:0] Y;  // Result.
