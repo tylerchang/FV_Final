@@ -50,23 +50,17 @@ module structural_alu (
     multiplexer_8_1 muxy(result, AS, AS, And, Or, Xor, Not, 16'b0, 16'b0, opcode);// Select the result.
 
     // Sequential behavior
-    always_ff @(posedge clk or negedge rst_n) begin
-        if (!rst_n) begin
-            result        <= 16'b0;
-            //overflow_flag <= 1'b0;
-        end else begin
-            case (opcode)
-                3'b000: result <= AS;        // ADD
-                3'b010: result <= AS;        // SUB
-                3'b011: result <= And;       // AND
-                3'b100: result <= Or;        // OR
-                3'b101: result <= Xor;       // XOR
-                3'b110: result <= Not;       // NOT
-                default: result <= 16'b0;    // Default
-            endcase
-            //overflow_flag <= Vas;            // Update overflow flag
-        end
-    end
+    always @(*) begin
+         case (opcode)
+               3'b000: result <= AS;        // ADD
+               3'b010: result <= AS;        // SUB
+               3'b011: result <= And;       // AND
+               3'b100: result <= Or;        // OR
+               3'b101: result <= Xor;       // XOR
+               3'b110: result <= Not;       // NOT
+               default: result <= 16'b0;    // Default
+         endcase
+         end
 endmodule
 
 module andop(Y, A, B);
