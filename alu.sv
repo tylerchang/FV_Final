@@ -54,7 +54,7 @@ module alu (input [15:0] inputA,
 
 	property input_stability;
     @(posedge clk) disable iff (!rst_n)
-    (opcode != 3'b000 && opcode != 3'b001 && opcode != 3'b010 && opcode != 3'b011 && opcode != 3'b100 && opcode != 3'b101 && opcode != 3'b110) |-> 
+    (opcode != 3'b111) |-> 
         (inputA == $past(inputA) && inputB == $past(inputB) && opcode == $past(opcode));
 	endproperty
 
