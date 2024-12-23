@@ -53,16 +53,21 @@ module alu (input [15:0] inputA,
 	endproperty
 
 	property input_stability;
-    @(posedge clk) disable iff (!rst_n)
-    (opcode != 3'b111) |-> 
-        (inputA == $past(inputA) && inputB == $past(inputB) && opcode == $past(opcode));
+    @(posedge clk) (opcode != 3'b111) |-> (inputA == $past(inputA) && inputB == $past(inputB) && opcode == $past(opcode));
 	endproperty
 
 	property output_stability;
-    @(posedge clk) disable iff (!rst_n)
-    (opcode == 3'b111) |-> 
-        (result == $past(result) && overflow_flag == $past(overflow_flag));
+    @(posedge clk) (opcode == 3'b111) |-> result == $past(result);
 	endproperty
+
+	property input_transition_validity;
+    @(posedge clk) $rose(opcode) |-> $stable(inputA) && $stable(inputB);
+	endproperty
+
+	property output_transition_validity;
+    @(posedge clk) ($changed(opcode)) |-> result == $past(result);
+	endproperty
+
 
 
 
@@ -78,6 +83,8 @@ module alu (input [15:0] inputA,
 
 	INPUT_STABILITY: assert property (input_stability) else $error("Inputs changed during valid operation!");
 	OUTPUT_STABILITY: assert property (output_stability) else $error("Outputs changed unexpectedly!");
+	INPUT_TRANSITION_STABILITY: assert property (input_transition_validity) else $error("Inputs transitioned unexpectedly!");
+	OUTPUT_TRANSITION_STABILITY: assert property (output_transition_validity) else $error("Outputs transitioned unexpectedly!");
 
 
 
