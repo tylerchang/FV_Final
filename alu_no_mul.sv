@@ -26,10 +26,6 @@ module alu (input [15:0] inputA,
 	@(posedge clk) (opcode == 3'b000) |-> (result == inputA + inputB);
 	endproperty
 
-	property check_multiply;
-	@(posedge clk) (opcode == 3'b001) |-> (result == inputA * inputB);
-	endproperty
-
 	property check_subtract;
 	@(posedge clk) (opcode == 3'b010) |-> (result == inputA - inputB);
 	endproperty
@@ -53,7 +49,6 @@ module alu (input [15:0] inputA,
 
 	// Assertions
 	ADD_CHECK: assert property (check_add) else $error("ADD operation failed");
-	MULTIPLY_CHECK:assert property (check_multiply) else $error("MULTIPLY operation failed");
 	SUBTRACT_CHECK: assert property (check_subtract) else $error("SUBTRACT operation failed");
 	AND_CHECK: assert property (check_and) else $error("AND operation failed");
 	OR_CHECK: assert property (check_or) else $error("OR operation failed");
