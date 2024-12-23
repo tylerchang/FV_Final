@@ -12,5 +12,5 @@ clock clk
 reset ~rst_n
 
 check_assumptions -task <embedded> -conflict
-#check_sec -prove -bg
-#check_sec -signoff -task <embedded>
+check_sec -prove -bg
+check_sec -signoff -task <embedded>
