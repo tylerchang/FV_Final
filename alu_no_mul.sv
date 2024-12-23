@@ -19,7 +19,7 @@ module alu (input [15:0] inputA,
     	end
 
 	// Input validity assumption for opcode
-	assume property (@(posedge clk) opcode inside {3'b000, 3'b001, 3'b010, 3'b011, 3'b100, 3'b101, 3'b110});
+	assume property (@(posedge clk) opcode inside {3'b000, 3'b001, 3'b010, 3'b011, 3'b100, 3'b101});
 
 	// SVA properties
 	property check_add;
