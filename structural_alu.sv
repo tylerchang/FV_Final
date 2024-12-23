@@ -35,7 +35,6 @@ module structural_alu (
     input  logic [15:0] inputB,       // Operand B
     input  logic [2:0]  opcode,       // Operation code
     output logic [15:0] result,       // Result
-    output logic        overflow_flag // Overflow flag
 );
 
     wire [15:0] AS, And, Or, Xor, Not;

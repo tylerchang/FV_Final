@@ -4,7 +4,6 @@ module alu (input [15:0] inputA,
 	    input clk,
 	    input rst_n,
             output reg [15:0] result,
-	    output reg[1:0] overflow_flag   
 );
 	
 	always @(*) begin
