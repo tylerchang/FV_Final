@@ -18,4 +18,7 @@ Run scripts to setup Jasper Environment and additionally open the Jasper GUI.
 
 # Runs Sequential Equivalence Checking between alu_no_mul.sv and structural_alu.sv
 ./run_sec.sh
+
+# Cleanup Jasper files
+./clean.sh
 ```
