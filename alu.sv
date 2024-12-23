@@ -20,10 +20,16 @@ module alu (input [15:0] inputA,
 		endcase
     	end
 
-	// Input validity assumption for opcode
-	assume property (@(posedge clk) opcode inside {3'b000, 3'b001, 3'b010, 3'b011, 3'b100, 3'b101, 3'b110});
 
-	// SVA properties
+	// Opcode Formatting
+	assume property (@(posedge clk) opcode inside {3'b000, 3'b001, 3'b010, 3'b011, 3'b100, 3'b101, 3'b110});
+	
+	// Ensure inputA and inputB to be 16 bits
+	assume property (@(posedge clk) $bits(inputA) == 16);
+	assume property (@(posedge clk) $bits(inputB) == 16);
+
+
+	// Functional Correctness
 	property check_add;
 	@(posedge clk) (opcode == 3'b000) |-> (result == inputA + inputB);
 	endproperty
