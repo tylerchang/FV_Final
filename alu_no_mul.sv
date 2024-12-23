@@ -10,11 +10,11 @@ module alu (input [15:0] inputA,
 	always @(*) begin
 		case (opcode)
 		    3'b000: result = inputA + inputB;  // ADD
-		    3'b010: result = inputA - inputB;  // SUBTRACT
-		    3'b011: result = inputA & inputB;  // AND
-		    3'b100: result = inputA | inputB;  // OR
-		    3'b101: result = inputA ^ inputB;  // XOR
-		    3'b110: result = ~inputA;          // NOT (only operates on inputA)
+		    3'b001: result = inputA - inputB;  // SUBTRACT
+		    3'b010: result = inputA & inputB;  // AND
+		    3'b011: result = inputA | inputB;  // OR
+		    3'b100: result = inputA ^ inputB;  // XOR
+		    3'b101: result = ~inputA;          // NOT (only operates on inputA)
 		    default: result = 16'b0;           // Default case
 		endcase
     	end

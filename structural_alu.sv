@@ -53,11 +53,11 @@ module structural_alu (
     always @(*) begin
          case (opcode)
                3'b000: result <= AS;        // ADD
-               3'b010: result <= AS;        // SUB
-               3'b011: result <= And;       // AND
-               3'b100: result <= Or;        // OR
-               3'b101: result <= Xor;       // XOR
-               3'b110: result <= Not;       // NOT
+               3'b001: result <= AS;        // SUB
+               3'b010: result <= And;       // AND
+               3'b011: result <= Or;        // OR
+               3'b100: result <= Xor;       // XOR
+               3'b101: result <= Not;       // NOT
                default: result <= 16'b0;    // Default
          endcase
          end
