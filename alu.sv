@@ -52,6 +52,20 @@ module alu (input [15:0] inputA,
 	@(posedge clk) (opcode == 3'b110) |-> (result == ~inputA);
 	endproperty
 
+	property input_stability;
+    @(posedge clk) disable iff (!rst_n)
+    (opcode != 3'b000 && opcode != 3'b001 && opcode != 3'b010 && opcode != 3'b011 && opcode != 3'b100 && opcode != 3'b101 && opcode != 3'b110) |-> 
+        (inputA == $past(inputA) && inputB == $past(inputB) && opcode == $past(opcode));
+	endproperty
+
+	property output_stability;
+    @(posedge clk) disable iff (!rst_n)
+    (opcode == 3'b000 || opcode == 3'b001 || opcode == 3'b010 || opcode == 3'b011 || opcode == 3'b100 || opcode == 3'b101 || opcode == 3'b110) |-> 
+        (result == $past(result) && overflow_flag == $past(overflow_flag));
+	endproperty
+
+
+
 
 	// Assertions
 	ADD_CHECK: assert property (check_add) else $error("ADD operation failed");
@@ -61,6 +75,9 @@ module alu (input [15:0] inputA,
 	OR_CHECK: assert property (check_or) else $error("OR operation failed");
 	XOR_CHECK: assert property (check_xor) else $error("XOR operation failed");
 	NOT_CHECK: assert property (check_not) else $error("NOT operation failed");
+
+	INPUT_STABILITY: assert property (input_stability) else $error("Inputs changed during valid operation!");
+	OUTPUT_STABILITY: assert property (output_stability) else $error("Outputs changed unexpectedly!");
 
 
 
