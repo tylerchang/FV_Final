@@ -11,15 +11,6 @@ set_sec_autoprove_strategy basic
 clock clk
 reset ~rst_n
 
-#read_design alu.sv -golden
-#read_design alu_structural.sv -revised
-
-#set_inputs {inputA inputB opcode clk rst_n}
-#set_outputs {result overflow_flag}
-#set_reset rst_n
-#set_clock clk
-#set_equivalence_mode sequential
-
-#run_equivalence
-#write_report -file alu_sequential_equivalence_report.txt
-
+check_assumptions -task <embedded> -conflict
+#check_sec -prove -bg
+#check_sec -signoff -task <embedded>
