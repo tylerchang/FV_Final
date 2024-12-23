@@ -3,7 +3,7 @@ module alu (input [15:0] inputA,
             input [2:0] opcode,
 	    input clk,
 	    input rst_n,
-            output reg [15:0] result,
+            output reg [15:0] result
 );
 	
 	always @(*) begin
