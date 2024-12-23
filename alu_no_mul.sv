@@ -27,23 +27,23 @@ module alu (input [15:0] inputA,
 	endproperty
 
 	property check_subtract;
-	@(posedge clk) (opcode == 3'b010) |-> (result == inputA - inputB);
+	@(posedge clk) (opcode == 3'b001) |-> (result == inputA - inputB);
 	endproperty
 
 	property check_and;
-	@(posedge clk) (opcode == 3'b011) |-> (result == (inputA & inputB));
+	@(posedge clk) (opcode == 3'b010) |-> (result == (inputA & inputB));
 	endproperty
 
 	property check_or;
-	@(posedge clk) (opcode == 3'b100) |-> (result == (inputA | inputB));
+	@(posedge clk) (opcode == 3'b011) |-> (result == (inputA | inputB));
 	endproperty
 
 	property check_xor;
-	@(posedge clk) (opcode == 3'b101) |-> (result == (inputA ^ inputB));
+	@(posedge clk) (opcode == 3'b100) |-> (result == (inputA ^ inputB));
 	endproperty
 
 	property check_not;
-	@(posedge clk) (opcode == 3'b110) |-> (result == ~inputA);
+	@(posedge clk) (opcode == 3'b101) |-> (result == ~inputA);
 	endproperty
 
 
